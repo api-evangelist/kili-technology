@@ -1,0 +1,98 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Kili Technology
+providerId: kili-technology
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- AI
+- Data Labeling
+- Training Data
+- Annotation
+- GraphQL
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Kili Technology spend. Kili is a subscription / sales-led
+  data-labeling platform: a Free evaluation tier, a usage-based Grow plan, and a
+  custom Enterprise contract, plus optional per-hour expert annotation services.
+  Cost drivers are seats, annotated assets/labels volume, and managed-workforce
+  hours rather than per-API-call metering. Specific rates are quoted by sales and
+  are not reconciled here.
+notes: >-
+  Confirm contract structure, seat and asset allowances, and expert-service
+  hourly rates with Kili during reconciliation; usage-based Grow pricing is not
+  fully published.
+sources:
+- https://kili-technology.com/pricing
+- https://docs.kili-technology.com
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Kili Technology
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Kili Technology Platform
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Kili Technology
+  PublisherName: Kili Technology
+  InvoiceIssuerName: Kili Technology
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription
+meters:
+- name: team_seats
+  description: Active team seats with access to the labeling application and API.
+  unit: seats
+  aggregation: max
+  dimensions:
+  - account
+  - organization
+- name: annotated_assets
+  description: Assets imported and annotated, the primary volume driver on the Grow plan.
+  unit: assets
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+- name: labels_created
+  description: Labels and predictions created across projects.
+  unit: labels
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+- name: expert_service_hours
+  description: Hours of in-platform expert annotation services, billed per hour.
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+principles:
+- name: Visibility
+  description: Track seats, annotated-asset counts, and labels per project via the GraphQL countProjects / countAssets / countLabels queries.
+- name: Allocation
+  description: Tag projects and API keys per team/workload; map annotation volume to internal cost centers.
+- name: Optimization
+  description: Use quality workflows (consensus, honeypot, review issues) to reduce rework; right-size seats and reserve expert-service hours for specialized tasks.
+- name: Accountability
+  description: Assign project owners; review annotated-asset volume and expert-service hours monthly against the contract or Grow budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

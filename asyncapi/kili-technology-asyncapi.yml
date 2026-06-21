@@ -1,0 +1,148 @@
+asyncapi: '2.6.0'
+id: 'urn:com:kili-technology:label:v2:label-created-or-updated'
+info:
+  title: Kili Technology Label Subscription (GraphQL over WebSocket)
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of Kili Technology's **GraphQL subscription**
+    surface. Kili's labeling application is served from a single GraphQL
+    endpoint at `https://cloud.kili-technology.com/api/label/v2/graphql`.
+    Queries and mutations use HTTP POST (modeled in
+    `openapi/kili-technology-openapi.yml`); the platform additionally exposes a
+    real GraphQL **subscription**, `labelCreatedOrUpdated`, delivered over
+    **WebSocket**.
+
+    The official Kili Python SDK opens this subscription by switching the
+    endpoint scheme from `http` to `ws`
+    (`wss://cloud.kili-technology.com/api/label/v2/graphql`) and sending the
+    GraphQL subscription document below over the GraphQL-WS protocol. The server
+    then pushes a message every time a label is created or updated in the
+    subscribed project.
+
+    Only the `labelCreatedOrUpdated` subscription is modeled here; all other
+    operations are request/response GraphQL over HTTP.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Kili Technology Terms of Service
+    url: https://kili-technology.com/terms-of-service
+  x-transport-notes:
+    transport: GraphQL subscription over WebSocket (graphql-ws)
+    protocol: wss
+    direction: server-to-client (push)
+    mediaType: application/json
+    triggeredBy: 'Open a WebSocket to wss://cloud.kili-technology.com/api/label/v2/graphql and send the labelCreatedOrUpdated subscription document with variable projectID.'
+    source: https://github.com/kili-technology/kili-python-sdk
+defaultContentType: application/json
+servers:
+  kili-cloud:
+    url: cloud.kili-technology.com/api/label/v2/graphql
+    protocol: wss
+    description: |
+      Kili Technology SaaS GraphQL endpoint. Subscriptions are delivered over
+      the WebSocket (wss) form of this same path. Self-managed deployments
+      expose the equivalent path under their own host.
+    security:
+      - apiKeyAuth: []
+channels:
+  labelCreatedOrUpdated:
+    description: |
+      GraphQL subscription channel that pushes a message whenever a label is
+      created or updated within the subscribed project. The client opens the
+      channel by sending the subscription operation with the `projectID`
+      variable over the WebSocket connection.
+    bindings:
+      ws:
+        bindingVersion: '0.1.0'
+      x-graphql:
+        operationType: subscription
+        operationName: labelCreatedOrUpdated
+        document: |
+          subscription($projectID: ID!) {
+            data: labelCreatedOrUpdated(projectID: $projectID) {
+              id
+              author { email }
+              labelOf { id }
+              labelType
+              jsonResponse
+            }
+          }
+    subscribe:
+      operationId: onLabelCreatedOrUpdated
+      summary: Receive label create/update events for a project (WebSocket).
+      description: |
+        After the subscription document is sent with `projectID`, the server
+        pushes a `Label` payload each time a label in that project is created
+        or updated.
+      message:
+        $ref: '#/components/messages/LabelEvent'
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: httpApiKey
+      in: header
+      name: Authorization
+      description: |
+        Kili API key sent in the Authorization header using Kili's documented
+        format: `Authorization: X-API-Key: <YOUR_API_KEY>`. The same header is
+        passed when establishing the WebSocket connection.
+  messages:
+    LabelEvent:
+      name: LabelEvent
+      title: Label created or updated
+      summary: |
+        A single GraphQL subscription payload carrying the label that was just
+        created or updated in the project.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/Label'
+      examples:
+        - name: labelUpdated
+          summary: A label was created or updated
+          payload:
+            data:
+              labelCreatedOrUpdated:
+                id: ckxyz-label-id
+                author:
+                  email: annotator@example.com
+                labelOf:
+                  id: ckxyz-asset-id
+                labelType: DEFAULT
+                jsonResponse: '{"JOB_0": {"categories": [{"name": "CAR"}]}}'
+  schemas:
+    Label:
+      type: object
+      description: |
+        A Kili annotation label, as delivered by the labelCreatedOrUpdated
+        subscription (field selection mirrors the Python SDK subscription
+        fragment).
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the label.
+        author:
+          type: object
+          description: The user who authored the label.
+          properties:
+            email:
+              type: string
+        labelOf:
+          type: object
+          description: The asset this label belongs to.
+          properties:
+            id:
+              type: string
+        labelType:
+          type: string
+          enum:
+            - PREDICTION
+            - DEFAULT
+            - REVIEW
+            - INFERENCE
+            - AUTOSAVE
+          description: The type of label.
+        jsonResponse:
+          type: string
+          description: JSON-encoded annotation payload for the label.

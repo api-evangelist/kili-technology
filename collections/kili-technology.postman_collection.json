@@ -1,0 +1,208 @@
+{
+  "info": {
+    "name": "Kili Technology GraphQL API",
+    "description": "Single GraphQL endpoint for the Kili Technology data-labeling platform: projects, assets, labels, issues, and users. POST GraphQL queries and mutations to https://cloud.kili-technology.com/api/label/v2/graphql.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Authorization", "type": "string" },
+      { "key": "value", "value": "X-API-Key: {{kiliApiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://cloud.kili-technology.com/api/label/v2/graphql" },
+    { "key": "kiliApiKey", "value": "" },
+    { "key": "projectId", "value": "" },
+    { "key": "assetId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "List Projects",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"query\": \"query projects($where: ProjectWhere!, $first: PageSize!, $skip: Int!) { data: projects(where: $where, first: $first, skip: $skip) { id title numberOfAssets } }\",\n  \"variables\": { \"where\": { \"id\": \"{{projectId}}\" }, \"first\": 10, \"skip\": 0 }\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"query\": \"mutation($data: CreateProjectData!) { data: createProject(data: $data) { id } }\",\n  \"variables\": { \"data\": { \"title\": \"My labeling project\", \"inputType\": \"IMAGE\", \"jsonInterface\": \"{\\\"jobs\\\": {}}\" } }\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assets",
+      "item": [
+        {
+          "name": "Count Assets",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"query\": \"query countAssets($where: AssetWhere!) { data: countAssets(where: $where) }\",\n  \"variables\": { \"where\": { \"project\": { \"id\": \"{{projectId}}\" } } }\n}"
+            }
+          }
+        },
+        {
+          "name": "Append Many Assets",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"query\": \"mutation appendManyAssets($data: AppendManyAssetsData!, $where: ProjectWhere!) { data: appendManyAssets(data: $data, where: $where) { id } }\",\n  \"variables\": { \"data\": { \"contentArray\": [\"https://example.com/image.jpg\"], \"externalIdArray\": [\"image-1\"] }, \"where\": { \"id\": \"{{projectId}}\" } }\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Labels",
+      "item": [
+        {
+          "name": "List Labels",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"query\": \"query labels($where: LabelWhere!, $first: PageSize!, $skip: Int!) { data: labels(where: $where, first: $first, skip: $skip) { id labelType jsonResponse createdAt author { email } labelOf { id } } }\",\n  \"variables\": { \"where\": { \"project\": { \"id\": \"{{projectId}}\" } }, \"first\": 100, \"skip\": 0 }\n}"
+            }
+          }
+        },
+        {
+          "name": "Append Many Labels",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"query\": \"mutation appendManyLabels($data: AppendManyLabelsData!, $where: AssetWhere!) { data: appendManyLabels(data: $data, where: $where) { id } }\",\n  \"variables\": { \"data\": { \"labelType\": \"DEFAULT\", \"jsonResponseArray\": [\"{}\"] }, \"where\": { \"id\": \"{{assetId}}\" } }\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Issues",
+      "item": [
+        {
+          "name": "Count Issues",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"query\": \"query countIssues($where: IssueWhere!) { data: countIssues(where: $where) }\",\n  \"variables\": { \"where\": { \"project\": { \"id\": \"{{projectId}}\" } } }\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Issues",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"query\": \"mutation createIssues($issues: [IssueToCreate!]!, $where: AssetWhere!) { data: createIssues(issues: $issues, where: $where) { id } }\",\n  \"variables\": { \"issues\": [ { \"text\": \"Please review this annotation\", \"type\": \"QUESTION\" } ], \"where\": { \"id\": \"{{assetId}}\" } }\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Current User (viewer)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"query\": \"query me { data: viewer { id email firstname lastname } }\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List Users",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"query\": \"query users($where: UserWhere!, $first: PageSize!, $skip: Int!) { data: users(where: $where, first: $first, skip: $skip) { id email firstname lastname } }\",\n  \"variables\": { \"where\": {}, \"first\": 10, \"skip\": 0 }\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

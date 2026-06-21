@@ -1,0 +1,274 @@
+# Kili Technology GraphQL schema (representative subset)
+#
+# This is a REPRESENTATIVE SDL subset of the Kili Technology GraphQL API served at
+# https://cloud.kili-technology.com/api/label/v2/graphql. Field and operation names mirror the
+# operations issued by the official Kili Python SDK (projects, assets, labels, issues, users).
+# It is not the full upstream schema; consult https://docs.kili-technology.com/reference/graphql-api
+# for the authoritative, complete schema.
+
+scalar DateTime
+scalar JSON
+scalar PageSize
+
+enum InputType {
+  IMAGE
+  TEXT
+  PDF
+  VIDEO
+  GEOSPATIAL
+  LLM_RLHF
+}
+
+enum LabelType {
+  PREDICTION
+  DEFAULT
+  REVIEW
+  INFERENCE
+  AUTOSAVE
+}
+
+enum Status {
+  TODO
+  ONGOING
+  LABELED
+  TO_REVIEW
+  REVIEWED
+}
+
+enum IssueType {
+  ISSUE
+  QUESTION
+}
+
+enum IssueStatus {
+  OPEN
+  SOLVED
+}
+
+# ---------------------------------------------------------------------------
+# Object types
+# ---------------------------------------------------------------------------
+
+type Project {
+  id: ID!
+  title: String
+  description: String
+  inputType: InputType
+  jsonInterface: JSON
+  numberOfAssets: Int
+  numberOfRemainingAssets: Int
+  consensusTotCoverage: Int
+  minConsensusSize: Int
+  roles: [ProjectUser!]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type ProjectUser {
+  id: ID!
+  role: String
+  user: User
+  activated: Boolean
+}
+
+type Asset {
+  id: ID!
+  externalId: String
+  content: String
+  jsonContent: JSON
+  jsonMetadata: JSON
+  status: Status
+  consensusMark: Float
+  honeypotMark: Float
+  isHoneypot: Boolean
+  labels: [Label!]
+  project: Project
+  createdAt: DateTime
+}
+
+type Label {
+  id: ID!
+  labelType: LabelType
+  jsonResponse: JSON
+  secondsToLabel: Int
+  isLatestLabelForUser: Boolean
+  author: User
+  labelOf: Asset
+  createdAt: DateTime
+}
+
+type Issue {
+  id: ID!
+  type: IssueType
+  status: IssueStatus
+  comments: [Comment!]
+  objectMid: String
+  asset: Asset
+  label: Label
+  author: User
+  createdAt: DateTime
+}
+
+type Comment {
+  id: ID!
+  text: String
+  author: User
+  createdAt: DateTime
+}
+
+type User {
+  id: ID!
+  email: String
+  firstname: String
+  lastname: String
+  organizationRole: String
+  organization: Organization
+  apiKeys: [ApiKey!]
+}
+
+type Organization {
+  id: ID!
+  name: String
+  license: JSON
+}
+
+type ApiKey {
+  id: ID!
+  name: String
+  key: String
+  createdAt: DateTime
+  expiryDate: DateTime
+  revoked: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Where / input filters
+# ---------------------------------------------------------------------------
+
+input ProjectWhere {
+  id: ID
+  searchQuery: String
+  archived: Boolean
+}
+
+input AssetWhere {
+  id: ID
+  project: ProjectWhere
+  externalIdStrictlyIn: [String!]
+  externalIdIn: [String!]
+  statusIn: [Status!]
+  consensusMarkGte: Float
+  consensusMarkLte: Float
+}
+
+input LabelWhere {
+  id: ID
+  project: ProjectWhere
+  asset: AssetWhere
+  typeIn: [LabelType!]
+  authorIn: [String!]
+}
+
+input IssueWhere {
+  project: ProjectWhere
+  asset: AssetWhere
+  status: IssueStatus
+}
+
+input UserWhere {
+  id: ID
+  email: String
+  organizationId: ID
+}
+
+input CreateProjectData {
+  title: String!
+  description: String
+  inputType: InputType!
+  jsonInterface: JSON!
+}
+
+input ProjectData {
+  title: String
+  description: String
+  jsonInterface: JSON
+}
+
+input AppendManyAssetsData {
+  contentArray: [String!]
+  externalIdArray: [String!]
+  jsonMetadataArray: [JSON!]
+}
+
+input AppendManyLabelsData {
+  labelType: LabelType!
+  jsonResponseArray: [JSON!]!
+  authorIdArray: [String!]
+  secondsToLabelArray: [Int!]
+}
+
+input IssueToCreate {
+  labelId: ID
+  objectMid: String
+  assetId: ID
+  text: String
+  type: IssueType
+}
+
+input IssueData {
+  status: IssueStatus
+}
+
+input UserData {
+  firstname: String
+  lastname: String
+  organizationRole: String
+}
+
+# ---------------------------------------------------------------------------
+# Operations
+# ---------------------------------------------------------------------------
+
+type Query {
+  projects(where: ProjectWhere!, first: PageSize!, skip: Int!): [Project!]
+  countProjects(where: ProjectWhere!): Int
+
+  assets(where: AssetWhere!, first: PageSize!, skip: Int!): [Asset!]
+  countAssets(where: AssetWhere!): Int
+
+  labels(where: LabelWhere!, first: PageSize!, skip: Int!): [Label!]
+  countLabels(where: LabelWhere!): Int
+
+  issues(where: IssueWhere!, first: PageSize!, skip: Int!): [Issue!]
+  countIssues(where: IssueWhere!): Int
+
+  users(where: UserWhere!, first: PageSize!, skip: Int!): [User!]
+  countUsers(where: UserWhere!): Int
+  viewer: User
+}
+
+type Mutation {
+  createProject(data: CreateProjectData!): Project
+  copyProject(data: JSON!): Project
+  updatePropertiesInProject(data: ProjectData!, where: ProjectWhere!): Project
+
+  appendManyAssets(data: AppendManyAssetsData!, where: ProjectWhere!): [Asset!]
+
+  appendManyLabels(data: AppendManyLabelsData!, where: AssetWhere!): [Label!]
+  appendToLabels(data: JSON!, where: AssetWhere!): Label
+  createHoneypot(data: JSON!): Label
+  copyLabels(data: JSON!): [Label!]
+  deleteLabels(ids: [ID!]!): [ID!]
+
+  createIssues(issues: [IssueToCreate!]!, where: AssetWhere!): [Issue!]
+  updatePropertiesInIssue(data: IssueData!, where: IssueWhere!): Issue
+
+  createUser(data: JSON!): User
+  updatePropertiesInUser(data: UserData!, where: UserWhere!): User
+  updatePassword(data: JSON!): User
+  resetPassword(where: UserWhere!): User
+}
+
+type Subscription {
+  labelCreatedOrUpdated(projectID: ID!): Label
+}

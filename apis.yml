@@ -1,0 +1,143 @@
+aid: kili-technology
+url: https://raw.githubusercontent.com/api-evangelist/kili-technology/refs/heads/main/apis.yml
+name: Kili Technology
+kind: company
+description: Kili Technology is a training-data and data-labeling platform for building
+  high-quality datasets for machine learning and LLMs. Its labeling application is
+  fully programmable through a single GraphQL API (and a Python SDK) covering projects,
+  assets, labels, issues, and users at https://cloud.kili-technology.com/api/label/v2/graphql.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- Data Labeling
+- Training Data
+- Annotation
+- GraphQL
+created: '2026-06-21'
+modified: '2026-06-21'
+specificationVersion: '0.19'
+apis:
+- aid: kili-technology:projects
+  name: Kili Technology Projects API
+  tags:
+  - Projects
+  - GraphQL
+  - Annotation
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kili-technology.com/reference/graphql-api
+  baseURL: https://cloud.kili-technology.com/api/label/v2/graphql
+  properties:
+  - url: https://docs.kili-technology.com/docs/managing-projects
+    type: Documentation
+  - url: https://docs.kili-technology.com/reference/graphql-api
+    type: APIReference
+  - url: openapi/kili-technology-openapi.yml
+    type: OpenAPI
+  - url: graphql/kili-technology-graphql.md
+    type: GraphQL
+  description: Create, read, update, copy, and count annotation projects via the GraphQL
+    fields projects, countProjects, createProject, copyProject, and updatePropertiesInProject,
+    including job/ontology configuration.
+- aid: kili-technology:assets
+  name: Kili Technology Assets API
+  tags:
+  - Assets
+  - GraphQL
+  - Import
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kili-technology.com/reference/graphql-api
+  baseURL: https://cloud.kili-technology.com/api/label/v2/graphql
+  properties:
+  - url: https://docs.kili-technology.com/docs/importing-data
+    type: Documentation
+  - url: https://docs.kili-technology.com/reference/graphql-api
+    type: APIReference
+  - url: openapi/kili-technology-openapi.yml
+    type: OpenAPI
+  - url: graphql/kili-technology-graphql.md
+    type: GraphQL
+  description: Import and manage data to annotate (images, text, documents, video, geospatial)
+    via assets, countAssets, and appendManyAssets, with external-id filtering and project
+    scoping.
+- aid: kili-technology:labels
+  name: Kili Technology Labels API
+  tags:
+  - Labels
+  - GraphQL
+  - Annotations
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kili-technology.com/reference/graphql-api
+  baseURL: https://cloud.kili-technology.com/api/label/v2/graphql
+  properties:
+  - url: https://docs.kili-technology.com/docs/exporting-project-data
+    type: Documentation
+  - url: https://docs.kili-technology.com/reference/graphql-api
+    type: APIReference
+  - url: openapi/kili-technology-openapi.yml
+    type: OpenAPI
+  - url: graphql/kili-technology-graphql.md
+    type: GraphQL
+  - url: asyncapi/kili-technology-asyncapi.yml
+    type: AsyncAPI
+  description: Create, append, count, export, and copy annotation labels and predictions
+    via labels, countLabels, appendManyLabels, appendToLabels, createHoneypot, and
+    copyLabels, plus a labelCreatedOrUpdated GraphQL subscription over WebSocket.
+- aid: kili-technology:issues
+  name: Kili Technology Issues API
+  tags:
+  - Issues
+  - GraphQL
+  - Review
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kili-technology.com/reference/graphql-api
+  baseURL: https://cloud.kili-technology.com/api/label/v2/graphql
+  properties:
+  - url: https://docs.kili-technology.com/docs/quality-management
+    type: Documentation
+  - url: https://docs.kili-technology.com/reference/graphql-api
+    type: APIReference
+  - url: openapi/kili-technology-openapi.yml
+    type: OpenAPI
+  - url: graphql/kili-technology-graphql.md
+    type: GraphQL
+  description: Create, count, list, and resolve review issues and questions on assets
+    and labels via createIssues, countIssues, issues, and updatePropertiesInIssue for
+    quality workflows.
+- aid: kili-technology:users
+  name: Kili Technology Users API
+  tags:
+  - Users
+  - GraphQL
+  - Access Management
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kili-technology.com/reference/graphql-api
+  baseURL: https://cloud.kili-technology.com/api/label/v2/graphql
+  properties:
+  - url: https://docs.kili-technology.com/docs/user-management
+    type: Documentation
+  - url: https://docs.kili-technology.com/reference/graphql-api
+    type: APIReference
+  - url: openapi/kili-technology-openapi.yml
+    type: OpenAPI
+  - url: graphql/kili-technology-graphql.md
+    type: GraphQL
+  description: Manage organization users and the current viewer via users, countUsers,
+    viewer (me), createUser, updatePropertiesInUser, and password reset mutations.
+common:
+- type: GitHubOrganization
+  url: https://github.com/kili-technology
+- type: LinkedIn
+  url: https://www.linkedin.com/company/kili-technology
+- type: Website
+  url: https://kili-technology.com
+- type: Documentation
+  url: https://docs.kili-technology.com
+- type: Plans
+  url: plans/kili-technology-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/kili-technology-rate-limits.yml
+- type: FinOps
+  url: finops/kili-technology-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

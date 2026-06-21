@@ -1,0 +1,98 @@
+aid: kili-technology
+name: Kili Technology
+review:
+  question: Does Kili Technology expose a documented public WebSocket / streaming API?
+  answer: true
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    Kili Technology's platform is driven by a single GraphQL API at
+    https://cloud.kili-technology.com/api/label/v2/graphql. Queries and
+    mutations use HTTP POST. Kili also exposes a real GraphQL subscription,
+    labelCreatedOrUpdated, delivered over WebSocket (the official Python SDK
+    opens the subscription by switching the endpoint scheme from http to ws).
+    Because a genuine bidirectional WebSocket subscription is documented, an
+    AsyncAPI 2.6 document was authored at asyncapi/kili-technology-asyncapi.yml
+    describing that subscription channel.
+findings:
+  summary: |
+    Kili Technology is a data-labeling platform whose entire application is
+    programmable through one GraphQL endpoint. Projects, assets, labels,
+    issues, and users are all served from
+    https://cloud.kili-technology.com/api/label/v2/graphql over HTTP POST for
+    queries and mutations. Authentication is an API key sent in the
+    Authorization header using Kili's documented format
+    "Authorization: X-API-Key: <key>". In addition to HTTP, Kili exposes a
+    real GraphQL subscription (labelCreatedOrUpdated) over WebSocket at the
+    wss:// form of the same path, used by the Python SDK to stream label
+    create/update events for a project. No REST resource API is published;
+    GraphQL is the canonical interface, complemented by the Python SDK.
+  transports:
+    - protocol: GraphQL-over-HTTP
+      scheme: https
+      baseURL: https://cloud.kili-technology.com/api/label/v2/graphql
+      documented: true
+      note: Single endpoint for all queries and mutations via HTTP POST.
+    - protocol: GraphQL-over-WebSocket
+      scheme: wss
+      baseURL: wss://cloud.kili-technology.com/api/label/v2/graphql
+      documented: true
+      note: GraphQL subscription labelCreatedOrUpdated streams label create/update events per project.
+    - protocol: REST
+      scheme: https
+      documented: false
+      note: No documented REST resource API; GraphQL is the canonical interface.
+  operationsConfirmedGraphql:
+    queries:
+      - projects
+      - countProjects
+      - assets
+      - countAssets
+      - labels
+      - countLabels
+      - issues
+      - countIssues
+      - users
+      - countUsers
+      - viewer
+    mutations:
+      - createProject
+      - copyProject
+      - updatePropertiesInProject
+      - appendManyAssets
+      - appendManyLabels
+      - appendToLabels
+      - createHoneypot
+      - copyLabels
+      - deleteLabels
+      - createIssues
+      - updatePropertiesInIssue
+      - createUser
+      - updatePropertiesInUser
+      - updatePassword
+      - resetPassword
+    subscriptions:
+      - labelCreatedOrUpdated
+sources:
+  - url: https://docs.kili-technology.com/reference/graphql-api
+    type: APIReference
+    note: GraphQL API reference; single endpoint exposing the full labeling application.
+  - url: https://github.com/kili-technology/kili-python-sdk
+    type: GitHub
+    note: Official Python SDK; its operation strings confirm the queries, mutations, and the labelCreatedOrUpdated subscription, the X-API-Key Authorization header, and the v2/graphql endpoint.
+  - url: https://python-sdk-docs.kili-technology.com
+    type: Documentation
+    note: Python SDK docs covering projects, assets, labels, issues, and users.
+actions:
+  asyncapiPath: asyncapi/kili-technology-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    A real GraphQL subscription over WebSocket (labelCreatedOrUpdated) is
+    documented and implemented in the SDK, so an AsyncAPI 2.6 document was
+    authored for that subscription channel with the WebSocket transport
+    declared explicitly. The HTTP GraphQL surface is modeled in
+    openapi/kili-technology-openapi.yml and graphql/kili-technology-graphql.md.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

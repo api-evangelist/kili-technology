@@ -1,0 +1,57 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Kili Technology
+providerId: kili-technology
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- AI
+- Data Labeling
+- Training Data
+- Annotation
+- GraphQL
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Kili Technology GraphQL API governs load primarily through query
+  complexity rather than published per-minute request quotas. Each response
+  carries an x-complexity header reflecting the cost of the executed operation,
+  and large result sets must be paginated using the first (PageSize) and skip
+  arguments. The Python SDK auto-paginates and throttles accordingly. Specific
+  numeric thresholds are not publicly documented and are not reconciled here.
+notes: >-
+  Confirm concrete complexity ceilings, page-size maximums, and any account or
+  plan-tier request limits with Kili during reconciliation; values may differ
+  between SaaS and self-managed deployments.
+sources:
+- https://docs.kili-technology.com/reference/graphql-api
+- https://python-sdk-docs.kili-technology.com
+responseCodes:
+  throttled: 429
+limits:
+- name: Query Complexity
+  scope: request
+  metric: complexity
+  limit: see provider documentation
+  notes: Each GraphQL response returns an x-complexity header; expensive queries may be rejected. Reduce field selection or page size to lower cost.
+- name: Page Size (first)
+  scope: request
+  metric: records
+  limit: see provider documentation
+  notes: Queries (projects, assets, labels, issues, users) page with first (PageSize) and skip; very large pages raise complexity.
+- name: Account Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Per-account request limits are not publicly documented; enterprise and self-managed limits are negotiated.
+policies:
+- name: Pagination
+  description: Use first/skip to page large result sets; the Python SDK paginates automatically to stay under complexity limits.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 responses and honor Retry-After when present.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

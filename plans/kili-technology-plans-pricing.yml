@@ -1,0 +1,120 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Kili Technology
+providerId: kili-technology
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- AI
+- Data Labeling
+- Training Data
+- Annotation
+- GraphQL
+- Plans
+description: >-
+  Kili Technology offers a tiered, largely sales-led pricing model for its
+  data-labeling platform: a Free plan to evaluate the tool, a usage-based Grow
+  plan, and an Enterprise plan with custom contracts and enterprise-grade
+  security. Kili also offers in-platform expert annotation services billed per
+  hour. The same GraphQL API is available across plans; published per-seat and
+  per-asset rates are not fully disclosed and are quoted by sales, so specific
+  prices here are not reconciled.
+notes: >-
+  Plan structure is drawn from the Kili pricing page and third-party listings;
+  exact seat, asset, and contract pricing is sales-led and should be confirmed
+  with Kili during reconciliation.
+sources:
+- https://kili-technology.com/pricing
+- https://docs.kili-technology.com
+plans:
+- id: kili-free
+  name: Free
+  type: free
+  description: >-
+    No-cost plan to evaluate the platform, with a limited number of team seats
+    and assets and basic image, text, video, and PDF annotation. Includes
+    GraphQL API and Python SDK access.
+  entries:
+  - label: Free Evaluation
+    name: free
+    type: free
+    metric: assets
+    limit: 5000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  elements:
+  - name: GraphQL API
+  - name: Python SDK
+  - name: Basic Annotation Tools
+- id: kili-grow
+  name: Grow
+  type: usage
+  description: >-
+    Usage-based plan that scales with annotation volume and team size for
+    growing labeling operations. Pricing quoted by sales.
+  entries:
+  - label: Usage-Based Annotation
+    name: grow_usage
+    type: usage
+    metric: assets
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales (usage-based)
+    userMultiplied: false
+  elements:
+  - name: GraphQL API
+  - name: Python SDK
+  - name: Quality Workflows
+  - name: Cloud Storage Integrations
+- id: kili-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom contracts with enterprise-grade data protection, SSO, on-premise /
+    dedicated deployment options, dedicated support, and negotiated volume
+    terms. Contact Kili sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: On-Premise / Dedicated Deployment
+  - name: SSO and Advanced Security
+  - name: Dedicated Support
+- id: kili-expert-services
+  name: Expert Annotation Services
+  type: usage
+  description: >-
+    Hire annotators within the Kili platform; hourly rate depends on project
+    specifics and domain expertise.
+  entries:
+  - label: In-Platform Annotators
+    name: expert_hourly
+    type: usage
+    metric: hours
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $6-$60 per hour
+    userMultiplied: false
+  elements:
+  - name: Managed Labeling Workforce
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
