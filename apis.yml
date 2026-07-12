@@ -124,6 +124,12 @@ apis:
   description: Manage organization users and the current viewer via users, countUsers,
     viewer (me), createUser, updatePropertiesInUser, and password reset mutations.
 common:
+- type: TrustCenter
+  url: security/kili-technology-trust-center.yml
+- type: DomainSecurity
+  url: security/kili-technology-domain-security.yml
+- type: Authentication
+  url: authentication/kili-technology-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/kili-technology
 - type: LinkedIn
@@ -138,6 +144,8 @@ common:
   url: rate-limits/kili-technology-rate-limits.yml
 - type: FinOps
   url: finops/kili-technology-finops.yml
+- type: Blog
+  url: https://kili-technology.com/blog/rss.xml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

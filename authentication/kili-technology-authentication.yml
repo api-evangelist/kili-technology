@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/kili-technology-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Kili API key passed in the Authorization header using Kili''s documented format,
+    where the X-API-Key token is embedded in the value: "Authorization: X-API-Key: <YOUR_API_KEY>".'
+  sources:
+  - openapi/kili-technology-openapi.yml
