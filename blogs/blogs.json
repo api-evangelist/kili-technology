@@ -1,0 +1,13 @@
+{
+  "repo": "kili-technology",
+  "feeds": [
+    {
+      "source": "https://kili-technology.com/blog/rss.xml",
+      "feed_url": "https://kili-technology.com/blog/rss.xml",
+      "title": "Kili Technology Blog",
+      "saved": 25
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 49
+}
