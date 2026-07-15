@@ -124,6 +124,8 @@ apis:
   description: Manage organization users and the current viewer via users, countUsers,
     viewer (me), createUser, updatePropertiesInUser, and password reset mutations.
 common:
+- type: AgenticAccess
+  url: agentic-access/kili-technology-agentic-access.yml
 - type: TrustCenter
   url: security/kili-technology-trust-center.yml
 - type: DomainSecurity
