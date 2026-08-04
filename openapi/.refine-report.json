@@ -1,0 +1,14 @@
+{
+  "provider": "kili-technology",
+  "sources": [
+    "kili-technology-graphql-api-openapi.yml"
+  ],
+  "outputs": [
+    "kili-technology-graphql-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,125 @@
+openapi: 3.0.1
+info:
+  title: Kili Technology GraphQL API
+  description: >-
+    OpenAPI description of the single Kili Technology GraphQL transport endpoint
+    (POST /api/label/v2/graphql). The Kili data-labeling platform exposes all of
+    its operations - projects, assets, labels, issues, and users - through one
+    GraphQL endpoint. This OpenAPI document models that HTTP transport; the
+    GraphQL operations themselves are documented in graphql/kili-technology-graphql.md
+    and graphql/kili-technology-schema.graphql.
+  termsOfService: https://kili-technology.com/terms-of-service
+  contact:
+    name: Kili Technology Support
+    url: https://kili-technology.com
+  version: '2.0'
+servers:
+  - url: https://cloud.kili-technology.com
+    description: Kili Technology SaaS cloud
+paths:
+  /api/label/v2/graphql:
+    post:
+      operationId: postGraphql
+      tags:
+        - GraphQL
+      summary: Execute a GraphQL query or mutation
+      description: >-
+        Single GraphQL transport endpoint. Send a GraphQL query or mutation in
+        the request body to operate on projects, assets, labels, issues, and
+        users. Subscriptions (e.g. labelCreatedOrUpdated) are served over
+        WebSocket at the same path.
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            examples:
+              listProjects:
+                summary: List projects
+                value:
+                  query: >-
+                    query projects($where: ProjectWhere!, $first: PageSize!, $skip: Int!) {
+                      data: projects(where: $where, first: $first, skip: $skip) { id title numberOfAssets }
+                    }
+                  variables:
+                    where:
+                      id: your-project-id
+                    first: 10
+                    skip: 0
+              createProject:
+                summary: Create a project
+                value:
+                  query: >-
+                    mutation($data: CreateProjectData!) {
+                      data: createProject(data: $data) { id }
+                    }
+                  variables:
+                    data:
+                      title: My labeling project
+                      inputType: IMAGE
+                      jsonInterface: '{"jobs": {}}'
+      responses:
+        '200':
+          description: >-
+            GraphQL response. Note GraphQL returns HTTP 200 even for operations
+            that produced errors; inspect the `errors` array in the body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+        '401':
+          description: Missing or invalid API key.
+        '429':
+          description: Rate or query-complexity limit exceeded.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        Kili API key passed in the Authorization header using Kili's documented
+        format, where the X-API-Key token is embedded in the value:
+        "Authorization: X-API-Key: <YOUR_API_KEY>".
+  schemas:
+    GraphQLRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The GraphQL query, mutation, or subscription document.
+        operationName:
+          type: string
+          description: Name of the operation to run when the document defines several.
+        variables:
+          type: object
+          additionalProperties: true
+          description: JSON object of variable values referenced by the operation.
+    GraphQLResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          nullable: true
+          additionalProperties: true
+          description: Result payload keyed by the requested fields (often aliased as `data`).
+        errors:
+          type: array
+          description: GraphQL errors, present when the operation failed in whole or part.
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              path:
+                type: array
+                items:
+                  type: string
+              extensions:
+                type: object
+                additionalProperties: true
