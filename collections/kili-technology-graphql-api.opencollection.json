@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kili Technology GraphQL API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GraphQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a GraphQL query or mutation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.kili-technology.com/api/label/v2/graphql",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Single GraphQL transport endpoint. Send a GraphQL query or mutation in the request body to operate on projects, assets, labels, issues, and users. Subscriptions (e.g. labelCreatedOrUpdated) are served over WebSocket at the same path."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

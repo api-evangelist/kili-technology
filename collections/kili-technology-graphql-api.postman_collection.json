@@ -1,0 +1,253 @@
+{
+  "item": [
+    {
+      "id": "b6a22195-8951-4dcb-bb03-13c3149e9474",
+      "name": "GraphQL",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3092fa46-a455-449d-ad7e-b46c56ae6c7a",
+          "name": "Execute a GraphQL query or mutation",
+          "request": {
+            "name": "Execute a GraphQL query or mutation",
+            "description": {
+              "content": "Single GraphQL transport endpoint. Send a GraphQL query or mutation in the request body to operate on projects, assets, labels, issues, and users. Subscriptions (e.g. labelCreatedOrUpdated) are served over WebSocket at the same path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "label",
+                "v2",
+                "graphql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"variables\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": 2016.5307045893476\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8aa3f8c8-a3a7-48d8-92e3-41e976881aec",
+              "name": "GraphQL response. Note GraphQL returns HTTP 200 even for operations that produced errors; inspect the `errors` array in the body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "label",
+                    "v2",
+                    "graphql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"query projects($where: ProjectWhere!, $first: PageSize!, $skip: Int!) {\\n  data: projects(where: $where, first: $first, skip: $skip) { id title numberOfAssets }\\n}\",\n  \"variables\": {\n    \"where\": {\n      \"id\": \"your-project-id\"\n    },\n    \"first\": 10,\n    \"skip\": 0\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"key_0\": 1387,\n    \"key_1\": \"string\",\n    \"key_2\": true\n  },\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extensions\": {\n        \"key_0\": 7970,\n        \"key_1\": false\n      }\n    },\n    {\n      \"message\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"extensions\": {\n        \"key_0\": \"string\",\n        \"key_1\": 963\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d288835-0e58-4408-a4f1-bca05ad81c39",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "label",
+                    "v2",
+                    "graphql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"query projects($where: ProjectWhere!, $first: PageSize!, $skip: Int!) {\\n  data: projects(where: $where, first: $first, skip: $skip) { id title numberOfAssets }\\n}\",\n  \"variables\": {\n    \"where\": {\n      \"id\": \"your-project-id\"\n    },\n    \"first\": 10,\n    \"skip\": 0\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "10a1a971-3fa1-4699-8345-222d245d415f",
+              "name": "Rate or query-complexity limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "label",
+                    "v2",
+                    "graphql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"query projects($where: ProjectWhere!, $first: PageSize!, $skip: Int!) {\\n  data: projects(where: $where, first: $first, skip: $skip) { id title numberOfAssets }\\n}\",\n  \"variables\": {\n    \"where\": {\n      \"id\": \"your-project-id\"\n    },\n    \"first\": 10,\n    \"skip\": 0\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.kili-technology.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "19860764-7f6e-4b3d-ac41-cbe96275f50e",
+    "name": "Kili Technology GraphQL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAPI description of the single Kili Technology GraphQL transport endpoint (POST /api/label/v2/graphql). The Kili data-labeling platform exposes all of its operations - projects, assets, labels, issues, and users - through one GraphQL endpoint. This OpenAPI document models that HTTP transport; the GraphQL operations themselves are documented in graphql/kili-technology-graphql.md and graphql/kili-technology-schema.graphql.\n\nContact Support:\n Name: Kili Technology Support",
+      "type": "text/plain"
+    }
+  }
+}
