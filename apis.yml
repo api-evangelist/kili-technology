@@ -21,6 +21,12 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kili-technology.png
 tags:
+- Artificial Intelligence
+- Data Labeling
+- Training Data
+- Annotation
+- GraphQL
+tags_raw:
 - AI
 - Data Labeling
 - Training Data
