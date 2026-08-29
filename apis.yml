@@ -6,6 +6,18 @@ description: Kili Technology is a training-data and data-labeling platform for b
   high-quality datasets for machine learning and LLMs. Its labeling application is
   fully programmable through a single GraphQL API (and a Python SDK) covering projects,
   assets, labels, issues, and users at https://cloud.kili-technology.com/api/label/v2/graphql.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
