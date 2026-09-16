@@ -5,12 +5,12 @@
       "source": "https://kili-technology.com/blog/rss.xml",
       "feed_url": "https://kili-technology.com/blog/rss.xml",
       "title": "Kili Technology Blog",
-      "saved": 2,
+      "saved": 0,
       "nature": "vendor-blog",
       "nature_basis": "path_blog"
     }
   ],
-  "fetched": "2026-09-06T18:58:10Z",
+  "fetched": "2026-09-13T12:41:53Z",
   "post_count": 72,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
