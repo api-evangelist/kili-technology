@@ -55,6 +55,8 @@ apis:
   humanURL: https://docs.kili-technology.com/reference/graphql-api
   baseURL: https://cloud.kili-technology.com/api/label/v2/graphql
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
