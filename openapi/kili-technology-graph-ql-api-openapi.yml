@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Kili Technology GraphQL API
+  title: Kili Technology Graph QL API
   description: OpenAPI description of the single Kili Technology GraphQL transport endpoint (POST /api/label/v2/graphql). The Kili data-labeling platform exposes all of its operations - projects, assets, labels, issues, and users - through one GraphQL endpoint. This OpenAPI document models that HTTP transport; the GraphQL operations themselves are documented in graphql/kili-technology-graphql.md and graphql/kili-technology-schema.graphql.
   termsOfService: https://kili-technology.com/terms-of-service
   contact:
@@ -11,13 +11,13 @@ servers:
 - url: https://cloud.kili-technology.com
   description: Kili Technology SaaS cloud
 tags:
-- name: GraphQL
+- name: Graph QL
 paths:
   /api/label/v2/graphql:
     post:
       operationId: postGraphql
       tags:
-      - GraphQL
+      - Graph QL
       summary: Execute a GraphQL query or mutation
       description: Single GraphQL transport endpoint. Send a GraphQL query or mutation in the request body to operate on projects, assets, labels, issues, and users. Subscriptions (e.g. labelCreatedOrUpdated) are served over WebSocket at the same path.
       security:
@@ -64,8 +64,9 @@ components:
       type: object
       properties:
         data:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           additionalProperties: true
           description: Result payload keyed by the requested fields (often aliased as `data`).
         errors:
