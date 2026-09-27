@@ -39,12 +39,14 @@ tags:
 - Training Data
 - Annotation
 - GraphQL
+- Real-Time
 tags_raw:
 - AI
 - Data Labeling
 - Training Data
 - Annotation
 - GraphQL
+- Real-Time
 created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.23'
@@ -55,8 +57,6 @@ apis:
   humanURL: https://docs.kili-technology.com/reference/graphql-api
   baseURL: https://cloud.kili-technology.com/api/label/v2/graphql
   tags:
-  - GraphQL
-  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
