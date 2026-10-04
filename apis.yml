@@ -33,6 +33,9 @@ accessModel:
   generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kili-technology.png
+x-docs-platform: readme
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-10-03
 tags:
 - Artificial Intelligence
 - Data Labeling
@@ -57,6 +60,8 @@ apis:
   humanURL: https://docs.kili-technology.com/reference/graphql-api
   baseURL: https://cloud.kili-technology.com/api/label/v2/graphql
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
