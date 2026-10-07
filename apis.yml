@@ -81,6 +81,8 @@ apis:
   - type: Documentation
     url: https://docs.kili-technology.com/docs/user-management
 common:
+- type: Pricing
+  url: https://kili-technology.com/pricing
 - type: AgenticAccess
   url: agentic-access/kili-technology-agentic-access.yml
 - type: TrustCenter
