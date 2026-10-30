@@ -1,4 +1,4 @@
-# Kili Technology (kili-technology)
+# Kili Technology
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,145 +66,142 @@
 
 Kili Technology is a training-data and data-labeling platform for building high-quality datasets for machine learning and LLMs. Its labeling application is fully programmable through a single GraphQL API (and a Python SDK) covering projects, assets, labels, issues, and users at https://cloud.kili-technology.com/api/label/v2/graphql.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/kili-technology/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/kili-technology/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Data Labeling · Training Data · Annotation · GraphQL · Real-Time
 
-## Tags
+## Kili Technology on APIs.io
 
-- AI
-- Data Labeling
-- Training Data
-- Annotation
-- GraphQL
+Everything profiled for Kili Technology is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kili-technology/](https://apis.io/providers/kili-technology/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (1)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [Kili Technology Graph QL API](https://apis.io/apis/kili-technology/kili-technology-graph-ql-api/) — The Graph QL API from Kili Technology — 1 operation(s) for graph ql.
 
-## APIs
+### Published properties
 
-### Kili Technology Projects API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create, read, update, copy, and count annotation projects via the GraphQL fields projects, countProjects, createProject, copyProject, and updatePropertiesInProject, including job/ontology configuration.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.kili-technology.com/reference/graphql-api](https://docs.kili-technology.com/reference/graphql-api)
-- **Base URL:** `https://cloud.kili-technology.com/api/label/v2/graphql`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Kili Technology Label Subscription (GraphQL over WebSocket)](https://apis.io/asyncapis/kili-technology/kili-technology-asyncapi/)
 
-- Projects
-- GraphQL
-- Annotation
+#### Event channels (1)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://docs.kili-technology.com/docs/managing-projects)
-- [API Reference](https://docs.kili-technology.com/reference/graphql-api)
-- [OpenAPI](openapi/kili-technology-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [GraphQL](graphql/kili-technology-graphql.md) — [GraphQL Specification](https://spec.graphql.org/)
-- [Postman Collection](collections/kili-technology.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kili-technology.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [labelCreatedOrUpdated](https://apis.io/channels/kili-technology/labelcreatedorupdated/)
 
-### Kili Technology Assets API
+#### GraphQL (1)
 
-Import and manage data to annotate (images, text, documents, video, geospatial) via assets, countAssets, and appendManyAssets, with external-id filtering and project scoping.
+GraphQL schemas.
 
-- **Human URL:** [https://docs.kili-technology.com/reference/graphql-api](https://docs.kili-technology.com/reference/graphql-api)
-- **Base URL:** `https://cloud.kili-technology.com/api/label/v2/graphql`
+- [Kili Technology GraphQL API](https://apis.io/graphqls/kili-technology/kili-technology-graphql/)
 
-#### Tags
+#### Agentic access (1)
 
-- Assets
-- GraphQL
-- Import
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Kili Technology Agentic Access](https://apis.io/agentic-access/kili-technology/kili-technology-agentic-access/)
 
-- [Documentation](https://docs.kili-technology.com/docs/importing-data)
-- [API Reference](https://docs.kili-technology.com/reference/graphql-api)
-- [OpenAPI](openapi/kili-technology-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [GraphQL](graphql/kili-technology-graphql.md) — [GraphQL Specification](https://spec.graphql.org/)
-- [Postman Collection](collections/kili-technology.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kili-technology.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Collections (2)
 
-### Kili Technology Labels API
+Postman and Open Collection request collections.
 
-Create, append, count, export, and copy annotation labels and predictions via labels, countLabels, appendManyLabels, appendToLabels, createHoneypot, and copyLabels, plus a labelCreatedOrUpdated GraphQL subscription over WebSocket.
+- [Kili Technology GraphQL API](https://apis.io/collections/kili-technology/open-kili-technology/)
+- [Kili Technology GraphQL API](https://apis.io/collections/kili-technology/open-kili-technology-graphql-api/)
 
-- **Human URL:** [https://docs.kili-technology.com/reference/graphql-api](https://docs.kili-technology.com/reference/graphql-api)
-- **Base URL:** `https://cloud.kili-technology.com/api/label/v2/graphql`
+#### Governance rules (1)
 
-#### Tags
+Spectral rulesets for the provider's contracts.
 
-- Labels
-- GraphQL
-- Annotations
+- [Kili Technology — asyncapi rules](https://apis.io/rules/kili-technology/kili-technology-asyncapi-spectral-rules/)
 
-#### Properties
+#### Security (3)
 
-- [Documentation](https://docs.kili-technology.com/docs/exporting-project-data)
-- [API Reference](https://docs.kili-technology.com/reference/graphql-api)
-- [OpenAPI](openapi/kili-technology-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [GraphQL](graphql/kili-technology-graphql.md) — [GraphQL Specification](https://spec.graphql.org/)
-- [AsyncAPI](asyncapi/kili-technology-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/kili-technology.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kili-technology.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### Kili Technology Issues API
+- [Kili Technology Authentication](https://apis.io/security/kili-technology/kili-technology-authentication/)
+- [Kili Technology Domain Security](https://apis.io/security/kili-technology/kili-technology-domain-security/)
+- [Kili Technology Trust Center](https://apis.io/security/kili-technology/kili-technology-trust-center/)
 
-Create, count, list, and resolve review issues and questions on assets and labels via createIssues, countIssues, issues, and updatePropertiesInIssue for quality workflows.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://docs.kili-technology.com/reference/graphql-api](https://docs.kili-technology.com/reference/graphql-api)
-- **Base URL:** `https://cloud.kili-technology.com/api/label/v2/graphql`
+Published plans, tiers and prices.
 
-#### Tags
+- [Kili Technology Plans Pricing](https://apis.io/plans/kili-technology/kili-technology-plans-pricing/)
 
-- Issues
-- GraphQL
-- Review
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [Documentation](https://docs.kili-technology.com/docs/quality-management)
-- [API Reference](https://docs.kili-technology.com/reference/graphql-api)
-- [OpenAPI](openapi/kili-technology-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [GraphQL](graphql/kili-technology-graphql.md) — [GraphQL Specification](https://spec.graphql.org/)
-- [Postman Collection](collections/kili-technology.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kili-technology.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Kili Technology Rate Limits](https://apis.io/rate-limits/kili-technology/kili-technology-rate-limits/)
 
-### Kili Technology Users API
+#### FinOps (1)
 
-Manage organization users and the current viewer via users, countUsers, viewer (me), createUser, updatePropertiesInUser, and password reset mutations.
+What the API costs to run, by operation.
 
-- **Human URL:** [https://docs.kili-technology.com/reference/graphql-api](https://docs.kili-technology.com/reference/graphql-api)
-- **Base URL:** `https://cloud.kili-technology.com/api/label/v2/graphql`
+- [Kili Technology Finops](https://apis.io/finops/kili-technology/kili-technology-finops/)
 
-#### Tags
+## Where to find this API
 
-- Users
-- GraphQL
-- Access Management
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Properties
-
-- [Documentation](https://docs.kili-technology.com/docs/user-management)
-- [API Reference](https://docs.kili-technology.com/reference/graphql-api)
-- [OpenAPI](openapi/kili-technology-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [GraphQL](graphql/kili-technology-graphql.md) — [GraphQL Specification](https://spec.graphql.org/)
-- [Postman Collection](collections/kili-technology.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kili-technology.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/kili-technology)
-- [LinkedIn](https://www.linkedin.com/company/kili-technology)
 - [Website](https://kili-technology.com)
 - [Documentation](https://docs.kili-technology.com)
-- [Plans](plans/kili-technology-plans-pricing.yml)
-- [Rate Limits](rate-limits/kili-technology-rate-limits.yml)
-- [Fin Ops](finops/kili-technology-finops.yml)
+- [Pricing](https://kili-technology.com/pricing)
+- [Blog](https://kili-technology.com/blog/rss.xml)
+- [GitHub](https://github.com/kili-technology)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 39.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 62.1 |
+| Contract governance | 13.6 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 22.6 |
+| Access clarity | 50.0 |
+
+**Agent readiness 24.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kili-technology/](https://apis.io/providers/kili-technology/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kili Technology: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kili-technology/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
